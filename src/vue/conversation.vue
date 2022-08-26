@@ -21,11 +21,11 @@
                             :model_id="model_id"
                             :user_id="user_id"
                             v-if="!textareaFocus"
-                            class="text-xl text-gray-700 hover:text-orange-700 transition-colors rounded-full flex justify-center items-center"></voice-recorder>
+                            class="text-xl text-gray-500 hover:text-orange-700 transition-colors rounded-full flex justify-center items-center"></voice-recorder>
 
             <!-- Image Uploader Button -->
             <div v-if="!textareaFocus">
-              <label class="cursor-pointer text-xl text-gray-700 hover:text-green-700 transition-colors rounded-full flex justify-center items-center">
+              <label class="cursor-pointer text-xl text-gray-500 hover:text-green-700 transition-colors rounded-full flex justify-center items-center">
                 <i class="fas fa-image"></i>
                 <input id="imageUploader" ref="imageUploader" type="file" @change.prevent="handleImageUpload" multiple class="hidden" :accept="supportedMediaFormat()" />
               </label>
@@ -33,7 +33,7 @@
 
             <!-- File Uploader Button -->
             <div v-if="!textareaFocus">
-              <label class="cursor-pointer text-xl text-gray-700 hover:text-purple-700 transition-colors rounded-full flex justify-center items-center">
+              <label class="cursor-pointer text-xl text-gray-500 hover:text-purple-700 transition-colors rounded-full flex justify-center items-center">
                 <i class="fas fa-file-alt"></i>
                 <input id="fileUploader" ref="fileUploader" type="file" @change.prevent="handleFileUpload" multiple class="hidden" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" />
               </label>
@@ -42,7 +42,7 @@
             <!-- Send Message Button -->
             <div @click="send"
                  v-if="textareaFocus"
-                 class="cursor-pointer text-xl text-gray-700 hover:text-blue-700 transition-colors rounded-full flex justify-center items-center pl-0.5">
+                 class="cursor-pointer text-xl text-gray-500 hover:text-blue-700 transition-colors rounded-full flex justify-center items-center pl-0.5">
               <i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
