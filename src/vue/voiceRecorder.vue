@@ -35,7 +35,6 @@ export default {
       })
 
       this.rec = new MediaRecorder(this.stream);
-      this.recording_stream = true
 
       this.rec.ondataavailable = e => {
         this.audio.push(e.data);
