@@ -1,6 +1,6 @@
 {
   "name": "@deegital/vuejs-trustup-io-messaging",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "A VueJS component for Trustup messaging",
   "main": "index.js",
   "author": "deegitalbe",
