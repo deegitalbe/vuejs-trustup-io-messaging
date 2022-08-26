@@ -1,5 +1,5 @@
 <template>
-    <div id="conversation" class="h-full border w-full flex flex-col justify-between relative">
+    <div id="conversation" class="h-full w-full flex flex-col justify-between relative">
 <!--        <div v-if="conversation && conversation.title" class="relative z-20 h-8 flex items-center justify-center text-center sticky top-0 left-0 w-full bg-gray-100 text-sm font-light uppercase">#{{ conversation.id }} {{ conversation.title }}</div>-->
         <div class="h-full overflow-y-auto py-4 pb-8 px-4" ref="message_list">
             <message-list v-if="conversation"
