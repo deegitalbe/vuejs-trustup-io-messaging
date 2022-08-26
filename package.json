@@ -16,24 +16,14 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "mix --production"
+    "production": "mix --production",
+    "version": "git add .",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.4.0",
-    "alpinejs": "^3.9.0",
     "autoprefixer": "^10.4.2",
-    "axios": "^0.21",
-    "browser-sync": "^2.27.10",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "laravel-mix": "^6.0.42",
     "lodash": "^4.17.19",
-    "postcss": "^8.4.6",
-    "postcss-import": "^14.0.1",
-    "tailwindcss": "^3.1.5",
-    "toasteo": "^1.0.7",
-    "vue": "^2.5",
-    "vue-loader": "^15.9.7",
-    "vue-template-compiler": "^2.6.14"
+    "tailwindcss": "^3.1.5"
   },
   "dependencies": {
     "@deegital/trustup-spa-js-assets": "^7.0.4",
@@ -44,6 +34,9 @@
     "moment": "^2.29.4",
     "pusher": "^5.1.1-beta",
     "pusher-js": "^7.4.0",
-    "tw-elements": "^1.0.0-alpha12"
+    "vue": "^2.5",
+    "vue-loader": "^15.9.7",
+    "vue-template-compiler": "^2.6.14",
+    "toasteo": "^1.0.7"
   }
 }
