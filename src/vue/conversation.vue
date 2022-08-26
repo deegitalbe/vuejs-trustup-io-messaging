@@ -148,7 +148,10 @@ export default {
     await this.seeConversation()
 
     this.$refs.textarea.addEventListener('focus', () => this.textareaFocus = true)
-    this.$refs.textarea.addEventListener('focusout', () => this.textareaFocus = false)
+    this.$refs.textarea.addEventListener('focusout', () => {
+      if (this.message_text.length == 0)
+        this.textareaFocus = false
+    })
   },
 
   beforeDestroy() {
