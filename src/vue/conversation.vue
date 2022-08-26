@@ -219,6 +219,7 @@ export default {
       if (!await message_endpoint.send(this.conversation.id, this.user_id, this.message_text)) return;
 
       this.message_text = ''
+      this.textareaFocus = false
     },
 
     async sendAudio(blob) {
