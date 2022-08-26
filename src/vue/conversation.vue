@@ -13,7 +13,7 @@
                               placeholder="Message..." name="" id="" rows="1"
                               v-model="message_text">{{ message_text }}</textarea>
 
-          <div class="gap-8 flex items-center absolute right-8 top-0 bottom-0">
+          <div class="gap-6 flex items-center absolute right-8 top-0 bottom-0">
 
             <!-- Voice recorder button -->
             <voice-recorder :disabled="!conversation"
