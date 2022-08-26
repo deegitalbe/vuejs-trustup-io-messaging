@@ -2,7 +2,7 @@
   <div class="relative cursor-pointer" :class="{'!text-orange-700': recording_stream}" @click="toggleRecord">
     <i class="fas fa-microphone relative"></i>
     <span :class="{'hidden': !recording_stream}"
-          class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+          class="animate-ping absolute inline-flex h-9 w-9 rounded-full bg-orange-400 opacity-75"></span>
   </div>
 </template>
 
