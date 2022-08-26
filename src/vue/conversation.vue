@@ -9,11 +9,11 @@
     <div class="w-full px-4 pr-8 py-4">
       <form ref="newMessage" class="flex flex-col space-y-2" @submit.prevent="send()">
         <div class="flex items-center space-x-4 relative">
-                    <textarea ref="textarea" :disabled="!conversation" class="w-full resize-none rounded-full border-0 outline-none outline-0 p-4 bg-gray-100"
+                    <textarea ref="textarea" :disabled="!conversation" class="w-full resize-none rounded-full border-0 outline-none outline-0 p-4 px-8 bg-gray-100"
                               placeholder="Message..." name="" id="" rows="1"
                               v-model="message_text">{{ message_text }}</textarea>
 
-          <div class="gap-4 flex items-center absolute right-4 top-0 bottom-0">
+          <div class="gap-4 flex items-center absolute right-8 top-0 bottom-0">
 
             <!-- Voice recorder button -->
             <voice-recorder :disabled="!conversation"
