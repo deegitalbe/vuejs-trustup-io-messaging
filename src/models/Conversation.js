@@ -7,13 +7,13 @@ export default new class Conversation {
         this.client = new Client(new MessagingCredentials())
     }
 
-    async get(app_name, model, model_id, create_if_not_exists = false) {
+    async get(app_name, model, model_id, create_if_not_exists = false, title = null) {
         let request = new Request()
             .setVerb('GET')
             .setUrl('conversations/' + app_name + '/' + model + '/' + model_id)
             .addQuery({
                 'create_if_not_exists': create_if_not_exists,
-                'title': 'Ma super conversation'
+                'title': title
             })
 
         let response = await this.client.try(request)
