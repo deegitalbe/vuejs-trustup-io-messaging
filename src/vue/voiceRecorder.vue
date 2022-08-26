@@ -1,8 +1,8 @@
 <template>
-    <div class="relative cursor-pointer" :class="{'!bg-orange-700': recording}" @click="toggleRecord">
-        <i class="fas fa-microphone relative"></i>
-        <span :class="{'hidden': !recording}" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-    </div>
+  <div class="relative cursor-pointer" @click="toggleRecord">
+    <i class="fas fa-microphone relative"></i>
+    <span :class="{'hidden': !recording}" class="animate-ping absolute inline-flex h-9 w-9 rounded-full bg-orange-400 opacity-75"></span>
+  </div>
 </template>
 
 <script>
