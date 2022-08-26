@@ -42,6 +42,24 @@ module.exports = {
     // ...
 ```
 
+### Configuration Pusher and Laravel Echo
+Add these lines inside your `resources/bootstrap.js` file (that should be required inside your `resources/index.js`)
+```js
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+window.Pusher = Pusher;
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    wsHost: process.env.MIX_PUSHER_HOST,
+    wsPort: 443,
+    wssPort: 443,
+    disableStats: true,
+});
+
+```
+
 ## Getting Started
 
 To use this package inside a non-vuejs project :
