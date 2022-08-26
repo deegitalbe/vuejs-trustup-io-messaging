@@ -9,7 +9,7 @@
         <div class="w-full px-4 pr-8 py-4">
             <form ref="newMessage" class="flex flex-col space-y-2" @submit.prevent="send()">
                 <div class="flex items-center space-x-4">
-                    <textarea ref="textarea" :disabled="!conversation" class="w-full resize-none rounded-lg border-gray-200"
+                    <textarea ref="textarea" :disabled="!conversation" class="w-full resize-none rounded-lg p-2 border border-gray-200"
                               placeholder="Message..." name="" id="" rows="1"
                               v-model="message_text">{{ message_text }}</textarea>
 
@@ -40,9 +40,11 @@
 
                     </div>
 
+                  <div class="flex">
                     <div @click="send"
                          class="cursor-pointer bg-blue-500 hover:bg-blue-700 transition-colors text-white rounded-full w-9 h-9 flex justify-center items-center pl-0.5">
-                        <i class="fas fa-chevron-right"></i></div>
+                      <i class="fas fa-chevron-right"></i></div>
+                  </div>
                 </div>
             </form>
         </div>
