@@ -15,6 +15,29 @@ Vue.component('Conversation', Conversation)
 new Vue({el: '#app'})
 ```
 
+### .env configuration
+
+Add these information to your `.env` file before build the app.
+```dotenv
+MIX_MESSAGING_TRUSTUP_API_URL=
+MIX_TUSTUP_API_URL=
+MIX_TRUSTUP_SERVER_AUTHORIZATION=
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=
+PUSHER_SCHEME=
+PUSHER_APP_CLUSTER=
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_HOST="${PUSHER_HOST}"
+MIX_PUSHER_PORT="${PUSHER_PORT}"
+MIX_PUSHER_SCHEME="${PUSHER_SCHEME}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
+
 In a vuejs project, just import the component
 ```js
 // yourfile.vue
