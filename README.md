@@ -30,10 +30,13 @@ MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ### Tailwind configuration for component build design
 Add this line in your `tailwind.config.js` to tell Tailwind to build the package design when running.
 ```js
+
+const messagingTailwindPath = require('@deegital/vuejs-trustup-io-messaging/tailwind')
+
 module.exports = {
     content: [
         // ...
-        './node_modules/@deegital/vuejs-trustup-io-messaging/**/*.vue',
+        messagingTailwindPath,
     ],
     
     // ...
