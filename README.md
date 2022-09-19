@@ -9,7 +9,7 @@ npm install @deegital/vuejs-trustup-io-messaging
 Add these information to your `.env` file **BEFORE** building the app.
 ```dotenv
 MIX_MESSAGING_TRUSTUP_API_URL=
-MIX_TUSTUP_API_URL=
+MIX_TRUSTUP_AUTH_API_URL=
 MIX_TRUSTUP_SERVER_AUTHORIZATION=
 
 PUSHER_APP_ID=
