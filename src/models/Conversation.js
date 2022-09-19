@@ -29,10 +29,13 @@ export default new class Conversation {
     async see(conversation_id, user_id) {
         let request = new Request()
             .setVerb('POST')
-            .setUrl('conversations/seen').addData({
+            .setUrl('conversations/seen')
+            .addData({
                 conversation_id,
                 user_id
             })
+
+        console.log({ request });
 
         let response = await this.client.try(request)
 
