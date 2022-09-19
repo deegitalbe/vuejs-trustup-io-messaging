@@ -30,8 +30,8 @@ export default new class Conversation {
         let request = new Request()
             .setVerb('POST')
             .setUrl('conversations/seen').addData({
-                'conversation_id': conversation_id,
-                'user_id': user_id,
+                conversation_id,
+                user_id
             })
 
         let response = await this.client.try(request)

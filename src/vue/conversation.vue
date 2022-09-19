@@ -79,13 +79,13 @@ export default {
   components: { VoiceRecorder, MessageList },
 
   props: {
-    appKey: { type: String },
+    appKey: { type: String, required: true },
 
-    modelType: { type: String },
+    modelType: { type: String, required: true },
 
-    modelId: { type: Number },
+    modelId: { required: true },
 
-    userId: { type: Number }
+    userId: { type: Number, required: true }
   },
 
   data() {
