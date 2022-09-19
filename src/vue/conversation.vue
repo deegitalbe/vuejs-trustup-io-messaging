@@ -4,24 +4,33 @@
     <div class="h-full overflow-y-auto py-4 pb-8 px-4" ref="message_list">
       <message-list v-if="conversation"
                     :conversation="conversation"
-                    :user_id="user_id"></message-list>
+                    :user-id="userId"></message-list>
     </div>
     <div class="w-full px-4 pr-8 py-4">
       <form ref="newMessage" class="flex flex-col space-y-2" @submit.prevent="send()">
         <div class="flex items-center space-x-4 relative">
-                    <textarea ref="textarea" :disabled="!conversation" class="w-full resize-none rounded-full border-0 outline-none outline-0 p-4 px-8 bg-gray-100"
-                              placeholder="Message..." name="" id="" rows="1"
-                              v-model="message_text">{{ message_text }}</textarea>
+                    <textarea
+                      ref="textarea"
+                      :disabled="!conversation"
+                      class="w-full resize-none rounded-full border-0 outline-none outline-0 p-4 px-8 bg-gray-100"
+                      placeholder="Message..."
+                      name=""
+                      id=""
+                      rows="1"
+                      v-model="message_text"
+                    ></textarea>
 
           <div class="gap-6 flex items-center absolute right-8 top-0 bottom-0">
 
             <!-- Voice recorder button -->
-            <voice-recorder :disabled="!conversation"
-                            :model="model"
-                            :model_id="model_id"
-                            :user_id="user_id"
-                            v-if="!textareaFocus"
-                            class="text-xl text-gray-500 hover:text-orange-700 transition-colors rounded-full flex justify-center items-center"></voice-recorder>
+            <voice-recorder 
+              :disabled="!conversation"
+              :model-type="modelType"
+              :model-id="modelId"
+              :user-id="userId"
+              v-if="!textareaFocus"
+              class="text-xl text-gray-500 hover:text-orange-700 transition-colors rounded-full flex justify-center items-center"
+            ></voice-recorder>
 
             <!-- Image Uploader Button -->
             <div v-if="!textareaFocus">
@@ -65,30 +74,18 @@ import {trying} from "@henrotaym/helpers";
 import user_endpoint from "../models/User";
 
 export default {
-  name: "conversation",
+  name: "trustup-conversation",
 
-  components: {VoiceRecorder, MessageList},
+  components: { VoiceRecorder, MessageList },
 
   props: {
-    app_name: {
-      type: String,
-      // default: 'messaging.trustup.io'
-    },
+    appKey: { type: String },
 
-    model: {
-      type: String,
-      // default: 'conversation'
-    },
+    modelType: { type: String },
 
-    model_id: {
-      type: Number,
-      // default: 1
-    },
+    modelId: { type: Number },
 
-    user_id: {
-      type: Number,
-      // default: 1
-    }
+    userId: { type: Number }
   },
 
   data() {
@@ -190,11 +187,11 @@ export default {
 
     async seeConversation() {
       if (this.canSeeConversation)
-        await conversation_endpoint.see(this.conversation.id, this.user_id);
+        await conversation_endpoint.see(this.conversation.id, this.userId);
     },
 
     async fetchConversation() {
-      this.conversation = await conversation_endpoint.get(this.app_name, this.model, this.model_id, true)
+      this.conversation = await conversation_endpoint.get(this.appKey, this.modelType, this.modelId, true)
       this.scrollToBottom()
     },
 
@@ -212,7 +209,7 @@ export default {
     async send() {
       if (this.message_text.length == 0) return;
 
-      if (!await message_endpoint.send(this.conversation.id, this.user_id, this.message_text)) return;
+      if (!await message_endpoint.send(this.conversation.id, this.userId, this.message_text)) return;
 
       this.message_text = ''
       this.textareaFocus = false
@@ -221,7 +218,7 @@ export default {
     async sendAudio(blob) {
       const file = new File([blob], "record.mp3", {type: "audio/x-mpeg-3"})
 
-      let created_message = await message_endpoint.sendFile(this.conversation.id, this.user_id, file)
+      let created_message = await message_endpoint.sendFile(this.conversation.id, this.userId, file)
     },
 
     async handleFileUpload()
@@ -234,7 +231,7 @@ export default {
         this.files.push(data);
         this.resetInput('fileUploader');
 
-        const message = await message_endpoint.sendFile(this.conversation.id, this.user_id, data.file, data.name)
+        const message = await message_endpoint.sendFile(this.conversation.id, this.userId, data.file, data.name)
       }
     },
 
@@ -252,7 +249,7 @@ export default {
         this.images.push(data);
         this.resetInput('imageUploader');
 
-        const message = await message_endpoint.sendFile(this.conversation.id, this.user_id, data.file, data.name)
+        const message = await message_endpoint.sendFile(this.conversation.id, this.userId, data.file, data.name)
       }
     },
 

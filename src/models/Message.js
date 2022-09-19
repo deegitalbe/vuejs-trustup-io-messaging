@@ -27,17 +27,21 @@ export default new class Message {
         return response.get().data
     }
 
-    async sendFile(conversation_id, user_id, file, filename = null) {
-        let request = new Request()
+    async sendFile(conversation_id, user_id, media_file, media_filename = null) {
+        const request = new Request()
             .setVerb('POST')
-            .setUrl('messages').addData({
-                conversation_id: conversation_id,
-                user_id: user_id,
-                media_file: file,
-                media_filename: filename
-            }).asForm(true)
+            .setUrl('messages')
+            .addData({
+                conversation_id,
+                user_id,
+                media_file,
+                media_filename
+            })
+            .asForm(true)
 
-        let response = await this.client.try(request)
+        console.log({ request });
+
+        const response = await this.client.try(request)
 
         if (response.failed()) {
             console.error(response.getException().context())

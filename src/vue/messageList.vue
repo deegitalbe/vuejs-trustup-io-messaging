@@ -17,7 +17,7 @@
       </div>
       <div class="flex space-x-0.5" v-if="conversation.users">
         <template v-for="user in conversation.users">
-          <div v-if="user && user.id != user_id && user.last_message_seen_id == message.id" class="mt-1 mb-2 w-6 h-6 border rounded-full bg-red-300 flex items-center justify-center" :title="user.first_name + ' ' + user.last_name">{{ user.first_name.charAt(0) }}</div>
+          <div v-if="user && user.id != userId && user.last_message_seen_id == message.id" class="mt-1 mb-2 w-6 h-6 border rounded-full bg-red-300 flex items-center justify-center" :title="user.first_name + ' ' + user.last_name">{{ user.first_name.charAt(0) }}</div>
         </template>
       </div>
     </div>
@@ -39,9 +39,9 @@ export default {
 
   props: {
     conversation: Object,
-    user_id: {
+    userId: {
       type: Number,
-      default: 1
+      required: true
     },
   },
 
@@ -78,7 +78,7 @@ export default {
     },
 
     sentByAuthUser(message) {
-      return message.user_id == this.user_id
+      return message.user_id == this.userId
     },
 
     messageSide(message) {

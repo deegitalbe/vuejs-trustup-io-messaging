@@ -66,21 +66,21 @@ To use this package inside a non-vuejs project :
 ```js
 // resources/app.js
 import Vue from 'vue'
-import Conversation from "@deegital/vuejs-trustup-io-messaging"
+import TrustupConversation from "@deegital/vuejs-trustup-io-messaging"
 
-Vue.component('Conversation', Conversation)
+Vue.component('TrustupConversation', TrustupConversation)
 new Vue({el: '#app'})
 ```
 
 In a vuejs project, just import the component
 ```js
 // yourfile.vue
-import Conversation from "@deegital/vuejs-trustup-io-messaging"
+import TrustupConversation from "@deegital/vuejs-trustup-io-messaging"
 
 export default {
     // ...
     
-    components: {Conversation}
+    components: { TrustupConversation }
     
     // ...
 }
@@ -88,8 +88,10 @@ export default {
 
 ## Usage
 ```html
-<conversation :app_name="'exemple'"
-              :model="'conversation'"
-              :model_id="1"
-              :user_id="1"></conversation>
+<trustup-conversation
+    app-key="example"
+    model-type="conversation"
+    :model-id="1"
+    :user-id="1"
+/>
 ```

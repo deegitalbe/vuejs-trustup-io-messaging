@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@deegital/trustup-spa-js-assets": "^7.0.4",
-    "@henrotaym/api-client": "^1.2.0",
+    "@henrotaym/api-client": "^1.2.1",
     "@henrotaym/helpers": "^1.2.0",
     "exif-js": "^2.3.0",
     "laravel-echo": "^1.13.1",
