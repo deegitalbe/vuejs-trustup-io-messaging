@@ -171,16 +171,18 @@ export default {
             this.conversation.messages.splice(this.conversation.messages.findIndex((_msg) => _msg.id == e.message.id), 1, e.message)
             this.seeConversation()
           })
-          .listen('ConversationSeenEvent', (e) => {
-            console.log('Conversation is seen', e.user)
+          .listen('ConversationSeenEvent', ({ user }) => {
+            console.log('Conversation is seen', user)
+            if (!this.conversation) return;
 
-            if (this.conversation) {
-              console.log(this.conversation)
-              if (!this.conversation.users)
-                this.conversation.users = {}
+            console.log(this.conversation)
+            this.conversation.users = this.conversation.users || [];
+            this.conversation.users_map = this.conversation.users_map || {};
 
-              this.conversation.users[e.user.id] = e.user
-            }
+            this.conversation.users_map[user.id] = user
+            const index = this.conversation.users.find(u => u.id === user.id);
+            if (index === -1) return;
+            this.conversation.users.splice(index, 1, user);
           })
 
     },

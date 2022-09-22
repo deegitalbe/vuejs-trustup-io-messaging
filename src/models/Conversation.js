@@ -12,8 +12,8 @@ export default new class Conversation {
             .setVerb('GET')
             .setUrl('conversations/' + app_key + '/' + model_type + '/' + model_id)
             .addQuery({
-                'create_if_not_exists': create_if_not_exists,
-                'title': title
+                create_if_not_exists,
+                title
             })
 
         let response = await this.client.try(request)

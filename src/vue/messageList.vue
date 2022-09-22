@@ -9,7 +9,7 @@
               <message :message="message"></message>
             </div>
             <div class="flex">
-              <div v-if="['alone', 'bottom'].includes(messageRounded(message, conversation.messages[index-1], conversation.messages[index+1]))" class="w-8 h-8 border rounded-full bg-red-300 flex items-center justify-center" :title="conversation.users[message.user_id].first_name + ' ' + conversation.users[message.user_id].last_name">{{ conversation.users[message.user_id].first_name.charAt(0) }}</div>
+              <div v-if="['alone', 'bottom'].includes(messageRounded(message, conversation.messages[index-1], conversation.messages[index+1]))" class="w-8 h-8 border rounded-full bg-red-300 flex items-center justify-center" :title="conversation.users_map[message.user_id].first_name + ' ' + conversation.users_map[message.user_id].last_name">{{ conversation.users_map[message.user_id].first_name.charAt(0) }}</div>
               <div v-else class="w-8 h-8"></div>
             </div>
           </div>
