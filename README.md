@@ -43,21 +43,9 @@ module.exports = {
 ```
 
 ### Configuration Pusher and Laravel Echo
-Add these lines inside your `resources/bootstrap.js` file (that should be required inside your `resources/index.js`)
+Add this lines inside your `resources/bootstrap.js` file (or any file representing your js entrypoint for the project)
 ```js
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
-
-window.Pusher = Pusher;
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    wsHost: process.env.MIX_PUSHER_HOST,
-    wsPort: 443,
-    wssPort: 443,
-    disableStats: true,
-});
-
+require('@deegital/vuejs-trustup-io-messaging/scripts/bootstrap');
 ```
 
 ## Getting Started
