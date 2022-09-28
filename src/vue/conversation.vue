@@ -165,7 +165,7 @@ export default {
     },
 
     onTabChange() {
-      if (document.visibilityState !== visible) return;
+      if (document.visibilityState !== "visible") return;
       this.seeConversation();
     },
 
