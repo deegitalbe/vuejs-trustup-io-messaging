@@ -182,10 +182,17 @@ export default {
 
     scrollToBottom() {
       this.$nextTick(() => {
-
+        const container = this.$refs.message_list;
+        if (!container) return;
         // Waiting for all media to be loaded before scrolling
-        document.querySelectorAll('#messaging img').forEach(img => img.addEventListener('load', this.scrollConversation));
-        document.querySelectorAll('#messaging video').forEach(vid => vid.addEventListener('loadeddata', this.scrollConversation));
+        container.querySelectorAll('img').forEach(img => { 
+          img.removeEventListener('load', this.scrollConversation);
+          img.addEventListener('load', this.scrollConversation);
+        });
+        container.querySelectorAll('video').forEach(vid => { 
+          vid.removeEventListener('loadeddata', this.scrollConversation);
+          vid.addEventListener('loadeddata', this.scrollConversation);
+        });
 
         this.scrollConversation();
       })
@@ -267,7 +274,7 @@ export default {
   },
   computed: {
     pusherChannel() {
-      return `conversation.${this.conversation.id}`
+      return `conversation.${this.conversation.id}`;
     }
   },
 
@@ -297,16 +304,12 @@ export default {
     document.removeEventListener("visibilitychange", this.onTabChange);
     this.$refs.textarea.removeEventListener('input', this.setTextareaFocus);
     
-    document.querySelectorAll('#messaging img').forEach(img =>
+    this.$refs.message_list.querySelectorAll('img').forEach(img =>
       img.removeEventListener('load', this.scrollConversation)
     )
     
-    document.querySelectorAll('#messaging video').forEach(vid =>
+    this.$refs.message_list.querySelectorAll('video').forEach(vid =>
       vid.removeEventListener('loadeddata', this.scrollConversation))
   },
 }
 </script>
-
-<style scoped>
-
-</style>
