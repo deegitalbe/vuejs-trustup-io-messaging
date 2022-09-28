@@ -145,11 +145,11 @@ export default {
     this.$refs.textarea.removeEventListener('input', this.setTextareaFocus);
     
     document.querySelectorAll('#messaging img').forEach(img =>
-      img.removeEventListener('load', () => this.scrollConversation)
+      img.removeEventListener('load', this.scrollConversation)
     )
     
     document.querySelectorAll('#messaging video').forEach(vid =>
-      vid.removeEventListener('loadeddata', () => this.scrollConversation))
+      vid.removeEventListener('loadeddata', this.scrollConversation))
   },
 
   methods: {
