@@ -112,7 +112,6 @@ export default {
 
       conversation: null,
       users: null,
-      canSeeConversation: true,
 
       keypress: null,
 
@@ -128,14 +127,7 @@ export default {
         .on(['NumpadEnter'], () => this.send())
 
     // Detect if user change tab
-    document.addEventListener("visibilitychange", (event) => {
-      if (document.visibilityState == "visible") {
-        this.canSeeConversation = true
-        this.seeConversation()
-      } else {
-        this.canSeeConversation = false
-      }
-    });
+    document.addEventListener("visibilitychange", this.onTabChange);
   },
 
   async created() {
@@ -149,9 +141,15 @@ export default {
 
   beforeDestroy() {
     this.keypress.removeListeners();
+    document.removeEventListener("visibilitychange", this.onTabChange);
   },
 
   methods: {
+
+    onTabChange() {
+      if (document.visibilityState !== visible) return;
+      this.seeConversation();
+    },
 
     supportedMediaFormat() {
       return this.supportedImageFormats.mimes.join() + ',' + this.supportedVideoFormats.mimes.join()
@@ -187,9 +185,8 @@ export default {
 
     },
 
-    async seeConversation() {
-      if (this.canSeeConversation)
-        await conversation_endpoint.see(this.conversation.id, this.userId);
+    seeConversation() {
+      return conversation_endpoint.see(this.conversation.id, this.userId);
     },
 
     async fetchConversation() {
@@ -204,7 +201,7 @@ export default {
         document.querySelectorAll('#messaging img').forEach(img => img.addEventListener('load', () => this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight))
         document.querySelectorAll('#messaging video').forEach(vid => vid.addEventListener('loadeddata', () => this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight))
 
-        this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight;
+        this.$refs?.message_list.scrollTop = this.$refs?.message_list.scrollHeight;
       })
     },
 
