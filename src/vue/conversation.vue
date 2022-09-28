@@ -128,6 +128,7 @@ export default {
 
     // Detect if user change tab
     document.addEventListener("visibilitychange", this.onTabChange);
+    this.$refs.textarea.addEventListener('input', this.setTextareaFocus)
   },
 
   async created() {
@@ -135,16 +136,18 @@ export default {
     await this.connectToChannel()
 
     await this.seeConversation()
-
-    this.$refs.textarea.addEventListener('input', () => this.textareaFocus = this.message_text.length > 0)
   },
 
   beforeDestroy() {
     this.keypress.removeListeners();
     document.removeEventListener("visibilitychange", this.onTabChange);
+    this.$refs.textarea.removeEventListener('input', this.setTextareaFocus)
   },
 
   methods: {
+    setTextareaFocus() {
+      this.textareaFocus = this.message_text.length > 0
+    },
 
     onTabChange() {
       if (document.visibilityState !== visible) return;
@@ -201,7 +204,11 @@ export default {
         document.querySelectorAll('#messaging img').forEach(img => img.addEventListener('load', () => this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight))
         document.querySelectorAll('#messaging video').forEach(vid => vid.addEventListener('loadeddata', () => this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight))
 
-        this.$refs?.message_list.scrollTop = this.$refs?.message_list.scrollHeight;
+        const messageList = this.$refs?.message_list;
+
+        if (!messageList) return;
+
+        messageList.scrollTop = messageList.scrollHeight;
       })
     },
 

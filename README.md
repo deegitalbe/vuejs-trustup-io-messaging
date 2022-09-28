@@ -1,7 +1,7 @@
 ## Installation
 
 ```shell
-npm install @deegital/vuejs-trustup-io-messaging
+yarn add @deegital/vuejs-trustup-io-messaging
 ```
 
 ### .env configuration
