@@ -1,6 +1,5 @@
 <template>
   <div id="conversation" class="h-full w-full flex flex-col justify-between relative">
-<!--    <div v-if="conversation && conversation.title" class="relative z-20 h-8 flex items-center justify-center text-center sticky top-0 left-0 w-full bg-gray-100 text-sm font-light uppercase">#{{ conversation.id }} {{ conversation.title }}</div>-->
     <div class="h-full overflow-y-auto py-4 pb-8 px-4" ref="message_list">
       <message-list v-if="conversation"
                     :conversation="conversation"
@@ -118,40 +117,6 @@ export default {
       textareaFocus: false,
     }
   },
-
-  mounted() {
-    this.keypress = new KeyPress(this.$refs.textarea)
-        .onKeydown(['Enter'], (e) => e.preventDefault())
-        .onKeydown(['NumpadEnter'], (e) => e.preventDefault())
-        .on(['Enter'], () => this.send())
-        .on(['NumpadEnter'], () => this.send())
-
-    // Detect if user change tab
-    document.addEventListener("visibilitychange", this.onTabChange);
-    this.$refs.textarea.addEventListener('input', this.setTextareaFocus)
-    this.scrollToBottom();
-  },
-
-  async created() {
-    await this.fetchConversation()
-    await this.connectToChannel()
-
-    await this.seeConversation()
-  },
-
-  beforeDestroy() {
-    this.keypress.removeListeners();
-    document.removeEventListener("visibilitychange", this.onTabChange);
-    this.$refs.textarea.removeEventListener('input', this.setTextareaFocus);
-    
-    document.querySelectorAll('#messaging img').forEach(img =>
-      img.removeEventListener('load', this.scrollConversation)
-    )
-    
-    document.querySelectorAll('#messaging video').forEach(vid =>
-      vid.removeEventListener('loadeddata', this.scrollConversation))
-  },
-
   methods: {
     scrollConversation() {
       const messageList = this.$refs?.message_list;
@@ -174,7 +139,7 @@ export default {
     },
 
     connectToChannel() {
-      window.Echo.channel('conversation.' + this.conversation.id)
+      window.Echo.channel(this.pusherChannel)
           .listen('MessageSentEvent', (e) => {
             console.log('Channel received message', e.message)
             this.conversation.messages.push(e.message)
@@ -201,6 +166,10 @@ export default {
             this.conversation.users.splice(index, 1, user);
           })
 
+    },
+
+    disconnectFromChannel() {
+      window.Echo.leave(this.pusherChannel);
     },
 
     seeConversation() {
@@ -295,7 +264,46 @@ export default {
       document.getElementById(id).value = null;
     },
 
-  }
+  },
+  computed: {
+    pusherChannel() {
+      return `conversation.${this.conversation.id}`
+    }
+  },
+
+  async created() {
+    await this.fetchConversation()
+    this.connectToChannel();
+    this.scrollToBottom();
+    this.seeConversation();
+  },
+
+  mounted() {
+    this.keypress = new KeyPress(this.$refs.textarea)
+        .onKeydown(['Enter'], (e) => e.preventDefault())
+        .onKeydown(['NumpadEnter'], (e) => e.preventDefault())
+        .on(['Enter'], () => this.send())
+        .on(['NumpadEnter'], () => this.send())
+
+    // Detect if user change tab
+    document.addEventListener("visibilitychange", this.onTabChange);
+    this.$refs.textarea.addEventListener('input', this.setTextareaFocus)
+    this.scrollToBottom();
+  },
+
+  beforeDestroy() {
+    this.disconnectFromChannel();
+    this.keypress.removeListeners();
+    document.removeEventListener("visibilitychange", this.onTabChange);
+    this.$refs.textarea.removeEventListener('input', this.setTextareaFocus);
+    
+    document.querySelectorAll('#messaging img').forEach(img =>
+      img.removeEventListener('load', this.scrollConversation)
+    )
+    
+    document.querySelectorAll('#messaging video').forEach(vid =>
+      vid.removeEventListener('loadeddata', this.scrollConversation))
+  },
 }
 </script>
 
