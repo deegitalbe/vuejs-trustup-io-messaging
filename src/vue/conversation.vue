@@ -129,6 +129,7 @@ export default {
     // Detect if user change tab
     document.addEventListener("visibilitychange", this.onTabChange);
     this.$refs.textarea.addEventListener('input', this.setTextareaFocus)
+    this.scrollToBottom();
   },
 
   async created() {
@@ -141,10 +142,24 @@ export default {
   beforeDestroy() {
     this.keypress.removeListeners();
     document.removeEventListener("visibilitychange", this.onTabChange);
-    this.$refs.textarea.removeEventListener('input', this.setTextareaFocus)
+    this.$refs.textarea.removeEventListener('input', this.setTextareaFocus);
+    
+    document.querySelectorAll('#messaging img').forEach(img =>
+      img.removeEventListener('load', () => this.scrollConversation)
+    )
+    
+    document.querySelectorAll('#messaging video').forEach(vid =>
+      vid.removeEventListener('loadeddata', () => this.scrollConversation))
   },
 
   methods: {
+    scrollConversation() {
+      const messageList = this.$refs?.message_list;
+      if (!messageList) return;
+
+      messageList.scrollTop = messageList.scrollHeight;
+    },
+    
     setTextareaFocus() {
       this.textareaFocus = this.message_text.length > 0
     },
@@ -194,21 +209,16 @@ export default {
 
     async fetchConversation() {
       this.conversation = await conversation_endpoint.get(this.appKey, this.modelType, this.modelId, true)
-      this.scrollToBottom()
     },
 
     scrollToBottom() {
       this.$nextTick(() => {
 
         // Waiting for all media to be loaded before scrolling
-        document.querySelectorAll('#messaging img').forEach(img => img.addEventListener('load', () => this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight))
-        document.querySelectorAll('#messaging video').forEach(vid => vid.addEventListener('loadeddata', () => this.$refs.message_list.scrollTop = this.$refs.message_list.scrollHeight))
+        document.querySelectorAll('#messaging img').forEach(img => img.addEventListener('load', this.scrollConversation));
+        document.querySelectorAll('#messaging video').forEach(vid => vid.addEventListener('loadeddata', this.scrollConversation));
 
-        const messageList = this.$refs?.message_list;
-
-        if (!messageList) return;
-
-        messageList.scrollTop = messageList.scrollHeight;
+        this.scrollConversation();
       })
     },
 
