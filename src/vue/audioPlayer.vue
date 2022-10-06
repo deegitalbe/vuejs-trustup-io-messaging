@@ -4,7 +4,7 @@
             <source :src="media_url" type="audio/mpeg" />
         </audio>
         <div id="audio-player" class="flex space-x-4 justify-between items-center z-10 relative">
-            <span @click="togglePlay" v-if="player" class="cursor-pointer bg-white text-blue-500 rounded-full p-1 text-sm w-7 h-7 flex items-center justify-center"><i class="fas" :class="{'fa-play': !playing, 'fa-pause': playing}"></i></span>
+            <span @click="togglePlay" v-if="player" class="cursor-pointer bg-white text-blue-500 rounded-full p-1 text-sm w-7 h-7 flex items-center justify-center"><i class="fas text-xs" :class="{'fa-play': !playing, 'fa-pause': playing}"></i></span>
             <div class="flex space-x-1 items-center overflow-hidden">
                 <div v-for="lineHeight in voiceLines" class="w-1 bg-white rounded-full" :style="'height: ' + lineHeight + 'px'"></div>
             </div>
