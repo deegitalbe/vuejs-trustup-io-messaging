@@ -201,7 +201,7 @@
   
       async fetchConversation() {
         this.loading.conversation = true;
-        this.conversation = await conversation_endpoint.get(this.appKey, this.modelType, this.modelId, true)
+        this.conversation = await conversation_endpoint.get(this.appKey, this.modelType, this.modelId, this.userId, true)
         this.loading.conversation = false;
       },
   
