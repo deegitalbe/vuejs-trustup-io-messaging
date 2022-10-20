@@ -73,7 +73,7 @@
         </form>
       </div>
     </div>
-  </template>
+</template>
   
   <script>
   
