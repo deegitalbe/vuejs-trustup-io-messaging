@@ -331,8 +331,8 @@
     },
   
     async created() {
-      await this.fetchConversation()
-      //this.connectToChannel();
+      await this.fetchConversation();
+      this.connectToChannel();
       this.scrollToBottom();
       this.seeConversation();
     },
