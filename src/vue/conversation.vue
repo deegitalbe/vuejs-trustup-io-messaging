@@ -247,10 +247,10 @@
               this.seeConversation();
               this.scrollToBottom();
           }
-  
-          if ( this.loading.messages > 0 ) {
-              this.loading.messages = 0;
-          }
+
+          if (this.loading.messages === 0) return;
+
+          this.loading.messages --;
       },
   
       async sendAudio(blob) {
@@ -279,7 +279,7 @@
   
       async onImageOrVideoUpload()
       {
-        this.$refs.imageUploader?.files?.forEach(this.handleImageOrVideoUpload);
+        [...this.$refs.imageUploader.files].forEach(this.handleImageOrVideoUpload);
       },
 
       async handleImageOrVideoUpload(file)
