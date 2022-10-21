@@ -52,6 +52,31 @@ export default new class Message {
         return response.get().data
     }
 
+    async sendImage(conversation_id, user_id, base64, media_filename = null) {
+        const request = new Request()
+            .setVerb('POST')
+            .setUrl('messages')
+            .addData({
+                conversation_id,
+                user_id,
+                image_base64: base64,
+                media_filename
+            })
+            .asForm(true)
+
+        console.log({ request });
+
+        const response = await this.client.try(request)
+
+        if (response.failed()) {
+            console.error(response.getException().context())
+            return null
+        }
+
+
+        return response.get().data
+    }
+
     async delete(message) {
         let request = new Request()
             .setVerb('DELETE')

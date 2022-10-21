@@ -51,7 +51,7 @@
               <div v-if="!textareaFocus">
                 <label class="cursor-pointer text-xl text-gray-500 hover:text-green-700 transition-colors rounded-full flex justify-center items-center">
                   <i class="fas fa-image"></i>
-                  <input id="imageUploader" ref="imageUploader" type="file" @change.prevent="handleImageUpload" multiple class="hidden" :accept="supportedMediaFormat()" />
+                  <input id="imageUploader" ref="imageUploader" type="file" @change.prevent="onImageOrVideoUpload" multiple class="hidden" :accept="supportedMediaFormat()" />
                 </label>
               </div>
   
@@ -277,24 +277,52 @@
         }
       },
   
-      async handleImageUpload()
+      async onImageOrVideoUpload()
       {
-        let images = this.$refs.imageUploader.files;
-        for ( let i = 0; i < images.length; i++ ) {
-          let data = this.supportedVideoFormats.mimes.includes(images[i].type) ?
-              await this.processFile(new UploadedFile(this.supportedVideoFormats), images[i]) : // Special Handle for videos
-              await this.processFile(new UploadedImage(this.supportedImageFormats), images[i])
-  
-          if (!data) return;
-  
-          console.log('New image:', data);
-          this.images.push(data);
-          this.resetInput('imageUploader');
-  
+        this.$refs.imageUploader?.files?.forEach(this.handleImageOrVideoUpload);
+      },
+
+      async handleImageOrVideoUpload(file)
+      {
+        const isVideo = this.supportedVideoFormats.mimes.includes(file.type);
+        const processedFile = isVideo ?
+          await this.processVideo(file)
+          : await this.processImage(file);
+
+        if (!processedFile) return;
+
+        console.log(`New ${isVideo ? 'video': 'image'}`, processedFile);
+        this.images.push(processedFile);
+        this.resetInput('imageUploader');
+
         this.beforeSendingMessage();
-          const message = await message_endpoint.sendFile(this.conversation.id, this.userId, data.file, data.name);
-          this.onNewMessageAdded(message);
-        }
+        const message = isVideo ?
+          await this.sendVideo(processedFile)
+          : await this.sendImage(processedFile);
+
+        if (!message) return;
+
+        this.onNewMessageAdded(message);
+      },
+
+      async processImage(image)
+      {
+        return this.processFile(new UploadedImage(this.supportedImageFormats), image);
+      },
+
+      async processVideo(video)
+      {
+        return this.processFile(new UploadedFile(this.supportedVideoFormats), video);
+      },
+
+      sendImage(image)
+      {
+        return message_endpoint.sendImage(this.conversation.id, this.userId, image.source, image.name);
+      },
+
+      sendVideo(video)
+      {
+        return message_endpoint.sendFile(this.conversation.id, this.userId, video.file, video.name);
       },
   
       async processFile(processor, file)
