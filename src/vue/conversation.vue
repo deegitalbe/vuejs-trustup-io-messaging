@@ -117,15 +117,16 @@
         supportedImageFormats: {
           size: 30000000, // 30MB
           extensions: ['jpg', 'jpeg', 'png', 'gif'],
-          mimes: ['image/jpeg', 'image/gif', 'image/png']
+          mimes: ['image/jpeg', 'image/gif', 'image/png'],
+          dimensions: { height: 2000, width: 2000 }
         },
         supportedVideoFormats: {
-          maxSize: 30000000, // 30MB
+          size: 100000000, // 100MB
           extensions: ['mp4', 'mov'],
           mimes: ['video/mp4', 'video/quicktime']
         },
         supportedFileFormats: {
-          maxSize: 30000000, // 30MB
+          size: 30000000, // 30MB
           extensions: ['pdf', 'doc', 'docx', 'xlxs', 'xls', 'csv'],
           mimes: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.wordprocessingml.template', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv']
         },
