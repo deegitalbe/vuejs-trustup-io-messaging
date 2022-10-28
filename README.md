@@ -42,12 +42,6 @@ module.exports = {
     // ...
 ```
 
-### Configuration Pusher and Laravel Echo
-Add this lines inside your `resources/bootstrap.js` file (or any file representing your js entrypoint for the project)
-```js
-require('@deegital/vuejs-trustup-io-messaging/scripts/bootstrap');
-```
-
 ## Getting Started
 
 To use this package inside a non-vuejs project :

@@ -76,7 +76,8 @@
 </template>
   
   <script>
-  
+  import { trustupWebsocket } from "@deegital/js-trustup-io-websocket";
+
   import conversation_endpoint from "../models/Conversation";
   import message_endpoint from "../models/Message";
   import KeyPress from '../vendors/keyPress'
@@ -161,7 +162,7 @@
       },
   
       connectToChannel() {
-        window.Echo.channel(this.pusherChannel)
+        trustupWebsocket.echo().channel(this.pusherChannel)
             .listen('MessageSentEvent', (e) => {
               if ( e.message && e.message.user_id == this.userId ) {
                   return;
@@ -193,7 +194,7 @@
       },
   
       disconnectFromChannel() {
-        window.Echo.leave(this.pusherChannel);
+        trustupWebsocket.echo().leave(this.pusherChannel);
       },
   
       seeConversation() {
