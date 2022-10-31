@@ -10,16 +10,17 @@
       <div class="h-full overflow-y-auto py-4 pb-8 px-4" ref="message_list">
         <message-list v-if="conversation"
                       :conversation="conversation"
-                      :user-id="userId"></message-list>
-          <div class="flex justify-end pr-[40px] mt-4" v-if="loading.messages > 0">
-              <div class="flex flex-col space-y-2">
-                  <div class="bg-blue-500 p-4 relative w-[100px] rounded-full" v-for="i in loading.messages">
-                      <div class="relative">
-                          <loader dot-color="bg-white" background-color="bg-blue-500" />
-                      </div>
-                  </div>
-              </div>
-          </div>
+                      :user-id="userId"
+                      :display-style="displayStyle"></message-list>
+        <div class="flex mt-4" :class="displayStyle == 'comments' ? 'pl-[40px]' : 'justify-end pr-[40px]'" v-if="loading.messages > 0">
+            <div class="flex flex-col space-y-2">
+                <div :key="`loading-message-${i}`" class="bg-blue-500 p-4 relative w-[100px]" :class="displayStyle == 'comments' ? 'bg-gray-200 rounded' : 'rounded-full bg-blue-500'" v-for="i in loading.messages">
+                    <div class="relative">
+                        <loader :dot-color="displayStyle == 'comments' ? 'bg-gray-600' : 'bg-white'" :background-color="displayStyle == 'comments' ? 'bg-gray-200' : 'bg-blue-500'" />
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
       <div class="w-full px-4 pr-8 py-4">
         <form ref="newMessage" class="flex flex-col space-y-2" @submit.prevent="send()">
@@ -102,7 +103,12 @@
   
       modelId: { required: true },
   
-      userId: { type: Number, required: true }
+      userId: { type: Number, required: true },
+
+        displayStyle: {
+            type: String,
+            default: 'chat'
+        }   
     },
   
     data() {
