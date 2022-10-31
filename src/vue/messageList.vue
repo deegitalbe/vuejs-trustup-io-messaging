@@ -15,7 +15,7 @@
                       </div>
                   </div>
               </div>
-              <div class="absolute bottom-0 z-10 text-xs text-gray-400 whitespace-nowrap font-extralight" :class="sentByAuthUser(message) ? 'right-[40px]' : 'left-[40px]'">
+              <div class="absolute bottom-0 z-10 text-xs text-gray-400 whitespace-nowrap font-extralight" :class="(sentByAuthUser(message) && displayStyle == 'chat') ? 'right-[40px]' : 'left-[40px]'">
                   {{ message.create_at_formated }}
               </div>
           </div>

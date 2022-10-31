@@ -170,10 +170,6 @@
       connectToChannel() {
         trustupWebsocket.echo().channel(this.pusherChannel)
             .listen('MessageSentEvent', (e) => {
-              if ( e.message && e.message.user_id == this.userId ) {
-                  return;
-              }
-  
               console.log('Channel received message', e.message)
               this.onNewMessageAdded(e.message);
             })
@@ -250,6 +246,11 @@
       },
   
       onNewMessageAdded(message = null) {
+		 if ( message && this.conversation.messages.some(m => m.id == message.id) ) {
+			console.log('Skip onNewMessageAdded because the message has already been added.', message);
+			return;
+		 }
+
           if ( message ) {
               this.conversation.messages.push(message);
               this.seeConversation();
