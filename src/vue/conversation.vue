@@ -14,7 +14,7 @@
                       :display-style="displayStyle"></message-list>
         <div class="flex mt-4" :class="displayStyle == 'comments' ? 'pl-[40px]' : 'justify-end pr-[40px]'" v-if="loading.messages > 0">
             <div class="flex flex-col space-y-2">
-                <div :key="`loading-message-${i}`" class="bg-blue-500 p-4 relative w-[100px]" :class="displayStyle == 'comments' ? 'bg-gray-200 rounded' : 'rounded-full bg-blue-500'" v-for="i in loading.messages">
+                <div :key="`loading-message-${i}`" class="p-4 relative w-[100px]" :class="displayStyle == 'comments' ? 'bg-gray-200 rounded' : 'rounded-full bg-blue-500'" v-for="i in loading.messages">
                     <div class="relative">
                         <loader :dot-color="displayStyle == 'comments' ? 'bg-gray-600' : 'bg-white'" :background-color="displayStyle == 'comments' ? 'bg-gray-200' : 'bg-blue-500'" />
                     </div>
