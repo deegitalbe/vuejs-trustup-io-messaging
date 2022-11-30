@@ -9,8 +9,8 @@ const getMixVariable = key => process?.env?.[`MIX_${key}`];
 const getVariable = (key, defaultValue = null) => getMixVariable(key) || getViteVariable(key) || defaultValue;
 
 const env = {
-    getMixValue,
-    getViteValue,
+    getMixVariable,
+    getViteVariable,
     getValue
 };
 
