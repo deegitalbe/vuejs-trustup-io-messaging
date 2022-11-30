@@ -1,13 +1,13 @@
-const getViteValue = key => import.meta?.env?.[key];
-const getMixValue = key => process?.env?.[key];
-
-const auth_url = getMixValue(MIX_TRUSTUP_AUTH_API_URL) || getViteValue(VITE_TRUSTUP_AUTH_API_URL);
-const messaging_url = getMixValue(MIX_MESSAGING_TRUSTUP_API_URL) || getViteValue(VITE_MESSAGING_TRUSTUP_API_URL);
-const authorization_header = getMixValue(MIX_TRUSTUP_SERVER_AUTHORIZATION) || getViteValue(VITE_TRUSTUP_SERVER_AUTHORIZATION);
+import { getEnvironmentVariable } from "../env"
 
 const config = {
-    auth: { url: auth_url, authorization_header },
-    messaging: { url: messaging_url },
+    auth: {
+        url: getEnvironmentVariable("TRUSTUP_AUTH_API_URL", "https://auth.trustup.io/api"),
+        authorization_header: getEnvironmentVariable("TRUSTUP_SERVER_AUTHORIZATION")
+    },
+    messaging: {
+        url: getEnvironmentVariable("MESSAGING_TRUSTUP_API_URL", "https://messaging.trustup.io/api")
+    },
 };
 
 export default config;
