@@ -58,7 +58,7 @@ new Vue({el: '#app'});
 
 ## Usage
 ```html
-<trustup-conversation
+<trustup-messaging-conversation
     app-key="example"
     model-type="conversation"
     :model-id="1"
