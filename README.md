@@ -4,9 +4,8 @@
 yarn add @deegital/vuejs-trustup-io-messaging
 ```
 
-### .env configuration
+### Environment configuration
 
-Add these information to your `.env`.
 Replace {YOUR-COMPILER} by **VITE** or **MIX** depending on your project compiler.
 
 ```dotenv
