@@ -11,7 +11,7 @@ const getVariable = (key, defaultValue = null) => getMixVariable(key) || getVite
 const env = {
     getMixVariable,
     getViteVariable,
-    getValue
+    getVariable
 };
 
 export { getVariable as getEnvironmentVariable };
