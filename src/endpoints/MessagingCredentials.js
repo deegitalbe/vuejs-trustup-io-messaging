@@ -1,10 +1,10 @@
 import {JsonCredential} from "@henrotaym/api-client";
+import config from "../config";
 
 export default class MessagingCredentials extends JsonCredential {
 
     prepare(request) {
-        super.prepare(request)
-        console.log('api url:', process.env.MIX_MESSAGING_TRUSTUP_API_URL)
-        request.setBaseUrl(process.env.MIX_MESSAGING_TRUSTUP_API_URL)
+        super.prepare(request);
+        request.setBaseUrl(config.messaging.url);
     }
 }

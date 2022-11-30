@@ -6,25 +6,13 @@ yarn add @deegital/vuejs-trustup-io-messaging
 
 ### .env configuration
 
-Add these information to your `.env` file **BEFORE** building the app.
+Add these information to your `.env`.
+Replace {YOUR-COMPILER} by **VITE** or **MIX** depending on your project compiler.
+
 ```dotenv
-MIX_MESSAGING_TRUSTUP_API_URL=
-MIX_TRUSTUP_AUTH_API_URL=
-MIX_TRUSTUP_SERVER_AUTHORIZATION=
-
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-PUSHER_HOST=
-PUSHER_PORT=
-PUSHER_SCHEME=
-PUSHER_APP_CLUSTER=
-
-MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-MIX_PUSHER_HOST="${PUSHER_HOST}"
-MIX_PUSHER_PORT="${PUSHER_PORT}"
-MIX_PUSHER_SCHEME="${PUSHER_SCHEME}"
-MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+{YOUR-COMPILER}_MESSAGING_TRUSTUP_API_URL=
+{YOUR-COMPILER}_TRUSTUP_AUTH_API_URL=
+{YOUR-COMPILER}_TRUSTUP_SERVER_AUTHORIZATION=
 ```
 
 ### Tailwind configuration for component build design
@@ -47,22 +35,22 @@ module.exports = {
 To use this package inside a non-vuejs project :
 ```js
 // resources/app.js
-import Vue from 'vue'
-import TrustupConversation from "@deegital/vuejs-trustup-io-messaging"
+import Vue from 'vue';
+import { TrustupMessagingConversation } from "@deegital/vuejs-trustup-io-messaging";
 
-Vue.component('TrustupConversation', TrustupConversation)
-new Vue({el: '#app'})
+Vue.component('TrustupMessagingConversation', TrustupMessagingConversation);
+new Vue({el: '#app'});
 ```
 
 In a vuejs project, just import the component
 ```js
 // yourfile.vue
-import TrustupConversation from "@deegital/vuejs-trustup-io-messaging"
+import { TrustupMessagingConversation } from "@deegital/vuejs-trustup-io-messaging";
 
 export default {
     // ...
     
-    components: { TrustupConversation }
+    components: { TrustupMessagingConversation }
     
     // ...
 }
