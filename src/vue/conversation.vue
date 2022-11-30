@@ -83,11 +83,11 @@
   import message_endpoint from "../models/Message";
   import KeyPress from '../vendors/keyPress'
   
-  import MessageList from "./messageList";
-  import VoiceRecorder from "./voiceRecorder";
+  import MessageList from "./messageList.vue";
+  import VoiceRecorder from "./voiceRecorder.vue";
   import UploadedFile from "@deegital/trustup-spa-js-assets/classes/UploadedFile";
   import UploadedImage from "@deegital/trustup-spa-js-assets/classes/UploadedImage";
-  import Loader from "@deegital/trustup-spa-js-assets/components/_Partials/Loader";
+  import Loader from "@deegital/trustup-spa-js-assets/components/_Partials/Loader.vue";
   import {trying} from "@henrotaym/helpers";
   import user_endpoint from "../models/User";
   

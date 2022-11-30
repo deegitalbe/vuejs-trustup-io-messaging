@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import AudioPlayer from "./audioPlayer";
+import AudioPlayer from "./audioPlayer.vue";
 export default {
     name: "message",
     components: {AudioPlayer},

@@ -32,7 +32,7 @@
   
   <script>
   
-  import Message from "./message";
+  import Message from "./message.vue";
   import message_endpoint from '../models/Message'
   
   import {Client, Request} from "@henrotaym/api-client";
