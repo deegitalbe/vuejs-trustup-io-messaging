@@ -262,8 +262,8 @@
           this.loading.messages --;
       },
   
-      async sendAudio(blob) {
-        const file = new File([blob], "record.mp3", {type: "audio/x-mpeg-3"})
+      async sendAudio(blob, mimeType) {
+        const file = new File([blob], "record.webm", {type: mimeType})
   
         this.beforeSendingMessage();
         let message = await message_endpoint.sendFile(this.conversation.id, this.userId, file);
