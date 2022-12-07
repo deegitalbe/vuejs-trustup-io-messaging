@@ -1,18 +1,27 @@
-const getViteVariable = key => import.meta?.env?.[`VITE_${key}`];
-const getMixVariable = key => process?.env?.[`MIX_${key}`];
+const getRealVariable = key => {
+    let value;
+
+    try {
+        value = process.env[`MIX_${key}`];
+    } catch (error) {}
+    if (value) return value;
+
+    try {
+        value = import.meta.env[`VITE_${key}`];
+    } catch (error) {}
+  
+    return value;
+};
+
 /**
  * Get environment variable.
  * @param {string} key Environment key to search for (without VITE_ or MIX_ prefix)
  * @param {?string} defaultValue Default value if not present in environment.
  * @returns {?string}
  */
-const getVariable = (key, defaultValue = null) => getMixVariable(key) || getViteVariable(key) || defaultValue;
+const getVariable = (key, defaultValue = null) => getRealVariable(key) || defaultValue;
 
-const env = {
-    getMixVariable,
-    getViteVariable,
-    getVariable
-};
+const env = { getVariable };
 
 export { getVariable as getEnvironmentVariable };
 export default env;
